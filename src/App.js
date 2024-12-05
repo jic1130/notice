@@ -14,6 +14,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState(""); // 검색창에 입력된 검색어
 
   const local = "http://localhost:4000"
+  const glitch = "https://rapid-vivacious-light.glitch.me"
 
 
   // 문서 목록을 처음 앱이 시작할 때 불러옴
@@ -21,7 +22,7 @@ function App() {
     const getAllText = async () => {
       try {
         // 서버로부터 모든 문서를 가져옴
-        const response = await axios.get("https://rapid-vivacious-light.glitch.me/post");
+        const response = await axios.get(`${glitch}/post`);
         setDatas(response.data); // 가져온 데이터를 상태 변수에 저장
       } catch (error) {
         console.error("문서를 불러오는 데 실패했습니다.", error); // 에러가 발생했을 때 콘솔에 출력
@@ -33,9 +34,9 @@ function App() {
   // 문서를 수정하는 함수
   const updateText = async (id, name, contents) => {
     try {
-      const body = { name, contents }; // 수정할 문서의 제목과 내용을 서버로 보낼 데이터로 준비
-      await axios.patch(`https://rapid-vivacious-light.glitch.me/post/${id}`, body); // 서버에 PATCH 요청으로 데이터 업데이트
-      const response = await axios.get("https://rapid-vivacious-light.glitch.me/post"); // 수정된 데이터를 다시 서버에서 가져옴
+      const body = { name, contents, isDeleted: false }; // 수정할 문서의 제목과 내용을 서버로 보낼 데이터로 준비
+      await axios.patch(`${local}/post/${id}`, body); // 서버에 PATCH 요청으로 데이터 업데이트
+      const response = await axios.get(`${glitch}/post`); // 수정된 데이터를 다시 서버에서 가져옴
       setDatas(response.data); // 최신 데이터를 상태 변수에 저장
       setInputTitle(""); // 제목 입력창 초기화
       setInputContent(""); // 내용 입력창 초기화
@@ -48,9 +49,9 @@ function App() {
   // 새로운 문서를 작성하는 함수
   const createText = async (name, contents) => {
     try {
-      const body = { name, contents }; // 새로 작성할 문서의 제목과 내용을 서버로 보낼 데이터로 준비
-      await axios.post("https://rapid-vivacious-light.glitch.me/post", body); // 서버에 POST 요청으로 데이터 추가
-      const response = await axios.get("https://rapid-vivacious-light.glitch.me/post"); // 추가된 데이터를 포함한 최신 데이터를 가져옴
+      const body = { name, contents, isDeleted: false }; // 새로 작성할 문서의 제목과 내용을 서버로 보낼 데이터로 준비
+      await axios.post(`${local}/post`, body); // 서버에 POST 요청으로 데이터 추가
+      const response = await axios.get(`${glitch}/post`); // 추가된 데이터를 포함한 최신 데이터를 가져옴
       setDatas(response.data); // 상태 변수에 저장
       setNewInputTitle(""); // 제목 입력창 초기화
       setNewInputContent(""); // 내용 입력창 초기화
@@ -71,9 +72,12 @@ function App() {
   };
 
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (text) => {
     try {
-      await axios.delete(`https://rapid-vivacious-light.glitch.me/post/${id}`);
+      await axios.patch(`${glitch}/post/${text.id}`,{
+        ...text,
+        isDeleted: true
+      });
       window.location.reload();
     } catch(error) {
         alert("글 삭제 중 에러가 발생했습니다.")
@@ -115,12 +119,12 @@ function App() {
         <div className="documents-container">
           <h1>게시글 목록</h1>
           {filteredDatas.length > 0 ? ( // 검색 결과가 있으면 문서 목록 표시
-            filteredDatas.map((text) => (
+            filteredDatas.filter((text) => text.isDeleted === false).map((text) => (
               <div key={text.id} className="document"> {/* 각각의 문서 */}
                 <div className="document-title">{text.name}</div> {/* 문서 제목 */}
                 <div className="document-content">{text.contents}</div> {/* 문서 내용 */}
                 <button onClick={() => handleEdit(text.id)}>수정하기</button> {/* 수정 버튼 */}
-                <button onClic={() => handleDelete(text.id)}>삭제하기</button>
+                <button onClick={() => handleDelete(text)}>삭제하기</button>
               </div>
             ))
           ) : (

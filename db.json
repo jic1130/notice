@@ -3,7 +3,8 @@
     {
       "id": "d0bf",
       "name": "TEST",
-      "contents": "TEST"
+      "contents": "TEST",
+      "isDeleted": false
     }
   ]
 }
