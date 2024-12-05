@@ -35,7 +35,7 @@ function App() {
   const updateText = async (id, name, contents) => {
     try {
       const body = { name, contents, isDeleted: false }; // 수정할 문서의 제목과 내용을 서버로 보낼 데이터로 준비
-      await axios.patch(`${local}/post/${id}`, body); // 서버에 PATCH 요청으로 데이터 업데이트
+      await axios.patch(`${glitch}/post/${id}`, body); // 서버에 PATCH 요청으로 데이터 업데이트
       const response = await axios.get(`${glitch}/post`); // 수정된 데이터를 다시 서버에서 가져옴
       setDatas(response.data); // 최신 데이터를 상태 변수에 저장
       setInputTitle(""); // 제목 입력창 초기화
@@ -50,7 +50,7 @@ function App() {
   const createText = async (name, contents) => {
     try {
       const body = { name, contents, isDeleted: false }; // 새로 작성할 문서의 제목과 내용을 서버로 보낼 데이터로 준비
-      await axios.post(`${local}/post`, body); // 서버에 POST 요청으로 데이터 추가
+      await axios.post(`${glitch}/post`, body); // 서버에 POST 요청으로 데이터 추가
       const response = await axios.get(`${glitch}/post`); // 추가된 데이터를 포함한 최신 데이터를 가져옴
       setDatas(response.data); // 상태 변수에 저장
       setNewInputTitle(""); // 제목 입력창 초기화
