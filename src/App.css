@@ -1,0 +1,170 @@
+/* 전체 레이아웃 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 메인 컨테이너 */
+.container {
+    width: 600px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* 헤더 스타일 */
+h1, h2 {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #333333;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #555555;
+}
+
+/* 닫기 버튼 */
+.close-button {
+    background-color: #777777;
+    color: #ffffff;
+}
+
+.close-button:hover {
+    background-color: #555555;
+}
+
+/* 입력 필드 스타일 */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    color: #000000;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #000000;
+    outline: none;
+    background-color: #ffffff;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* 검색창 스타일 */
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container input {
+    width: 75%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    color: #000000;
+    border: 1px solid #cccccc;
+}
+
+.search-container input:focus {
+    border-color: #000000;
+}
+
+/* 문서 목록 컨테이너 */
+.documents-container {
+    margin-top: 20px;
+}
+
+.document {
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.document:hover {
+    background-color: #ffffff;
+    transform: translateY(-3px);
+}
+
+.document .document-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.document .document-content {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #333333;
+}
+
+/* 문서 작성 및 수정 화면 */
+.edit-container {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.edit-container input,
+.edit-container textarea {
+    margin-bottom: 15px;
+}
+
+/* 스크롤바 스타일 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #aaaaaa;
+}
+
+::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
