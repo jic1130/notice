@@ -13,6 +13,8 @@ function App() {
   const [createToggle, setCreateToggle] = useState(false); // 새 문서를 작성하는 화면을 보여줄지 결정
   const [searchQuery, setSearchQuery] = useState(""); // 검색창에 입력된 검색어
 
+  const local = "http://localhost:4000"
+
 
   // 문서 목록을 처음 앱이 시작할 때 불러옴
   useEffect(() => {
@@ -68,6 +70,17 @@ function App() {
     }
   };
 
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://rapid-vivacious-light.glitch.me/post/${id}`);
+      window.location.reload();
+    } catch(error) {
+        alert("글 삭제 중 에러가 발생했습니다.")
+    }
+  }
+
+
   // 검색어에 맞는 문서만 필터링
   const filteredDatas = datas.filter((doc) => {
     return (
@@ -107,6 +120,7 @@ function App() {
                 <div className="document-title">{text.name}</div> {/* 문서 제목 */}
                 <div className="document-content">{text.contents}</div> {/* 문서 내용 */}
                 <button onClick={() => handleEdit(text.id)}>수정하기</button> {/* 수정 버튼 */}
+                <button onClic={() => handleDelete(text.id)}>삭제하기</button>
               </div>
             ))
           ) : (
