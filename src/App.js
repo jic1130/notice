@@ -97,7 +97,7 @@ function App() {
         </div>
       )}
 
-      {/* 문서 목록 표시 */}
+      {/* 문서 목록 표시! */}
       {!createToggle && !selectedId && (
         <div className="documents-container">
           <h1>게시글 목록</h1>
