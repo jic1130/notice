@@ -19,7 +19,7 @@ function App() {
     const getAllText = async () => {
       try {
         // 서버로부터 모든 문서를 가져옴
-        const response = await axios.get("http://localhost:4000/post");
+        const response = await axios.get("https://rapid-vivacious-light.glitch.me/post");
         setDatas(response.data); // 가져온 데이터를 상태 변수에 저장
       } catch (error) {
         console.error("문서를 불러오는 데 실패했습니다.", error); // 에러가 발생했을 때 콘솔에 출력
@@ -32,8 +32,8 @@ function App() {
   const updateText = async (id, name, contents) => {
     try {
       const body = { name, contents }; // 수정할 문서의 제목과 내용을 서버로 보낼 데이터로 준비
-      await axios.patch(`http://localhost:4000/post/${id}`, body); // 서버에 PATCH 요청으로 데이터 업데이트
-      const response = await axios.get("http://localhost:4000/post"); // 수정된 데이터를 다시 서버에서 가져옴
+      await axios.patch(`https://rapid-vivacious-light.glitch.me/post/${id}`, body); // 서버에 PATCH 요청으로 데이터 업데이트
+      const response = await axios.get("https://rapid-vivacious-light.glitch.me/post"); // 수정된 데이터를 다시 서버에서 가져옴
       setDatas(response.data); // 최신 데이터를 상태 변수에 저장
       setInputTitle(""); // 제목 입력창 초기화
       setInputContent(""); // 내용 입력창 초기화
@@ -47,8 +47,8 @@ function App() {
   const createText = async (name, contents) => {
     try {
       const body = { name, contents }; // 새로 작성할 문서의 제목과 내용을 서버로 보낼 데이터로 준비
-      await axios.post("http://localhost:4000/post", body); // 서버에 POST 요청으로 데이터 추가
-      const response = await axios.get("http://localhost:4000/post"); // 추가된 데이터를 포함한 최신 데이터를 가져옴
+      await axios.post("https://rapid-vivacious-light.glitch.me/post", body); // 서버에 POST 요청으로 데이터 추가
+      const response = await axios.get("https://rapid-vivacious-light.glitch.me/post"); // 추가된 데이터를 포함한 최신 데이터를 가져옴
       setDatas(response.data); // 상태 변수에 저장
       setNewInputTitle(""); // 제목 입력창 초기화
       setNewInputContent(""); // 내용 입력창 초기화
